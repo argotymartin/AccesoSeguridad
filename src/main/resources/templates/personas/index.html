@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminlte_templates/base}">
+
+<head th:replace="adminlte_templates/base::head">
+	<meta charset="ISO-8859-1">
+	<title>Ver Personal</title>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+
+	<div layout:fragment="contenido">
+		<div class="row mb-2" th:fragment="h1">
+			<div class="col-sm-6">
+				<h1 class="m-0">REGISTROS</h1>
+			</div>
+
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/personas/crear}">Crear Nuevo</a></li>
+					<li class="breadcrumb-item  active">Registros</li>
+				</ol>
+			</div>
+		</div>
+
+		<div class="container-fluid mt-4">
+
+			<a th:href="@{/personas/crear}" class="crear_persona btn btn-primary btn-crear" title="Registrar persona">&#10010;</a>
+			<div class="card mt-3">
+				<div class="card-persona card-body">
+					<table id="tabla_persona"
+						class="table table-hover table-striped table-sm table-responsive-md table-bordered text-center mt-5">
+						<thead class="bg-primary thead text-center">
+							<tr class=" th mt-4 th  text-white ">
+								<th style="text-align: center;">ID </th>
+								<th style="text-align: center;">Tipo de Identificacion</th>
+								<th style="text-align: center;">Identificacion</th>
+								<th style="text-align: center;">Primer Nombre</th>
+								<th style="text-align: center;">Segundo Nombre </th>
+								<th style="text-align: center;">Primer Apellido</thstyle="text-align: center;">-->
+								<th style="text-align: center;">Segundo Apellido </th>
+								<th style="text-align: center;">ARL</th>
+								<th style="text-align: center;">EPS</th>
+								<th class="text-center">&#128222; </th>
+								<th style="text-align: center;">ACCIONES </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="persona:${personas}">
+  								<td class="align-middle" th:text="${persona.personaCodigo}"></td>
+  								<td class="align-middle" th:text="${persona.personaTipoIdentificacion}"></td>
+								<td class="align-middle" th:text="${persona.personaIdentificacion}"></td>
+								<td class="align-middle" th:text="${persona.personaNombre1}"></td>
+								<td class="align-middle" th:text="${persona.personaNombre2}"></td>
+								<td class="align-middle" th:text="${persona.personaApellido1}"></td>
+								<td class="align-middle" th:text="${persona.personaApellido2}"></td>
+
+								<td>
+									<img class="btn-crear"  th:src="@{${persona.personaArlRuta} +'/'+ ${persona.personaArlArchivo}} "
+										width="80" height="40">
+								</td>
+
+								<td>
+									<img class="btn-crear" th:src="@{${persona.personaEpsRuta} +'/'+ ${persona.personaEpsArchivo}} "
+										width="80" height="40">
+								</td>
+
+								<td class="align-middle" th:text="${persona.personaTelefono}"></td>
+
+
+								<td>
+									<a th:href="@{/editar/} +${persona.personaCodigo}"
+										class="btn btn-outline-warning">Editar&#128190;</a>
+									<a th:href="@{/eliminar/}+${persona.personaCodigo}"
+										class="btn btn-outline-danger">Eliminar&#10060;</a>
+
+								</td>
+
+
+								<!-- Modal -->
+								<!--								<div class="modal fade" id="exampleModal" tabindex="-1"-->
+								<!--									aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+								<!--									<div class="modal-dialog  modal-xl">-->
+								<!--										<div class="modal-content">-->
+								<!--											<div class="modal-header">-->
+								<!--												<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+								<!--												<button type="button" class="close" data-dismiss="modal"-->
+								<!--													aria-label="Close">-->
+								<!--													<span aria-hidden="true">&times;</span>-->
+								<!--												</button>-->
+								<!--											</div>-->
+								<!--											<div class="modal-body">-->
+								<!--												<form th:action="@{/editar/} +${persona.id}" th:object=${persona} method="PUT"-->
+								<!--													enctype="multipart/form-data">-->
+								<!--													<div class="row">-->
+								<!--														<div class="form-group" hidden>-->
+								<!--															<label>ID</label>-->
+								<!--															<input th:field="*{id}" type="text" class="form-control" />-->
+								<!--														</div>-->
+								<!--														<div class="form-group mt-2 col">-->
+								<!--															<label>TIPO IDENTIFICACION</label>-->
+								<!--															<select class="custom-select">-->
+								<!--																<option selected>Tipo de identificacion...</option>-->
+								<!--																<option value="1">C.C</option>-->
+								<!--																<option value="2">NIT</option>-->
+								<!--																<option value="3">C.E</option>-->
+								<!--															</select>-->
+								<!--														</div>-->
+								<!--														<div class="form-group mt-2 col">-->
+								<!--															<label>IDENTIFICACION</label>-->
+								<!--															<input th:field="*{persona_identificacion}" type="number"-->
+								<!--																class="form-control" required autofocus-->
+								<!--																placeholder="Ingrese su identificacion..." />-->
+								<!--														</div>-->
+								<!--													</div>-->
+								<!--													<div class="row">-->
+								<!--														<div class="form-group mt-2 col">-->
+								<!--															<label class="text-uppercase">Primer Nombre</label>-->
+								<!--															<input th:field="*{persona_nombre1}" type="text"-->
+								<!--																class="form-control" required-->
+								<!--																placeholder="Ingrese el primer nombre..." />-->
+								<!--														</div>-->
+								<!--														<div class="form-group mt-2 col">-->
+								<!--															<label class="text-uppercase">Segundo Nombre</label>-->
+								<!--															<input th:field="*{persona_nombre2}" type="text"-->
+								<!--																class="form-control"-->
+								<!--																placeholder="Ingrese el segundo nombre..." />-->
+								<!--														</div>-->
+								<!--													</div>-->
+								<!--													<div class="row">-->
+								<!--														<div class="form-group col">-->
+								<!--															<label class="text-uppercase">Primer Apellido</label>-->
+								<!--															<input th:field="*{persona_apellido1}" type="text"-->
+								<!--																class="form-control" required-->
+								<!--																placeholder="Ingrese el primer apellido..." />-->
+								<!--														</div>-->
+								<!--														<div class="form-group col">-->
+								<!--															<label class="text-uppercase">Segundo Apellido</label>-->
+								<!--															<input th:field="*{persona_apellido2}" type="text"-->
+								<!--																class="form-control"-->
+								<!--																placeholder="Ingrese el segundo  apellido..." />-->
+								<!--														</div>-->
+								<!--													</div>-->
+								<!--													<div class="form-group mt-2 input-group-dynamic">-->
+								<!--														<label class="text-uppercase">Telefono</label>-->
+								<!--														<input th:field="*{persona_telefono}" type="text"-->
+								<!--															class="form-control" placeholder="Ingrese el telefono..." />-->
+								<!--													</div>-->
+
+								<!--													<div class="form-group mt-2">-->
+
+								<!--														<div>-->
+								<!--															<input type="file" class="form-control-file"-->
+								<!--																name="arlArchivoImagen" id="archivoImagen">-->
+								<!--														</div>-->
+
+								<!--														<div>-->
+								<!--															<input type="file" class="form-control-file"-->
+								<!--																name="epsArchivoImagen" id="epsArchivoImagen">-->
+								<!--														</div>-->
+
+								<!--													</div>-->
+								<!--											</div>-->
+								<!--											<div class="card-footer">-->
+								<!--												<input type="submit" value="Guardar" class="btn btn-primary">-->
+								<!--												<input type="reset" value="Limpiar" class="btn btn-danger">-->
+								<!--												<a th:href="@{/listar}" class="btn btn-success " title="Atras"><i-->
+								<!--														class="fa-solid fa-circle-left"></i></a>-->
+								<!--											</div>-->
+								<!--											</form>-->
+								<!--										</div>-->
+								<!--									</div>-->
+								<!--								</div>-->
+				</div>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<!--OTRO SCRIPTS PARA PAGINAS-->
+	<th:block layout:fragment="page-scripts">
+		<div th:if="${guardar != null}">
+			<script>
+				Swal.fire(
+					'Genial!',
+					'El registro ha sido guardado con exito!',
+					'success'
+				).then((result) => {
+
+					if (result.isConfirmed) {
+						window.location=("/personas/crear")
+					}
+				})
+			</script>
+		</div>
+
+		<script>
+
+			$(document).ready(function () {
+				$('#tabla_persona').DataTable({
+					dom: 'lfBrtip',
+					"language": {
+						"lengthMenu": "Mostrar _MENU_ resgistros",
+						"zeroRecords": "No se encontraron resultados",
+						"info": "Mostrando registros del _START_ al _END_  de un total de  _TOTAL_ registros",
+						"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+						"infoFiltered": "(Filtrado de un total de _MAX_ registros)",
+						"sSearch": "Buscar",
+						"oPaginate": {
+							"sFirst": "Primero",
+							"sLast": "Ultimo",
+							"sNext": "	&#10145;",
+							"sPrevious": "	&#11013;",
+						},
+						"sProcessing": "Procesando..."
+					},
+					responsive: true, "lengthChange": true, "autoWidth": true,
+					buttons: [{
+						extend: "pdf",
+						text: '<button class="btn btn-white text-white font-weight-bold btn-crear p-1">Pdf <i class="fas fa-file-pdf"></i></button>'
+					},
+					{
+						extend: "excel",
+						text: '<button class="btn btn-white text-white font-weight-bold btn-crear p-1">Xls <i class="fas fa-file-excel"></i></button>'
+					}
+					]
+				});
+			});
+
+		</script>
+
+	</th:block>
+
+</body>
+
+</html>

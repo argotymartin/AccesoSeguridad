@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminlte_templates/base}">
+
+<head th:replace="adminlte_templates/base::head">
+	<meta charset="ISO-8859-1">
+	<title>Crear Personal</title>
+</head>
+
+<body>
+	<div layout:fragment="contenido" class="content">
+		<div class="row mb-2" th:fragment="h1">
+			<div class="col-sm-6">
+				<h1 th:text="${new_edit}" class="m-0">CREAR NUEVO</h1>
+			</div>
+
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/listarpersona}">Ver Registros</a></li>
+					<li th:if="${new_edit == 'editando'}" class="breadcrumb-item"><a th:href="@{/crear-personas}">Crear Nuevo</a></li>
+					<li th:text="${new_edit}" class="breadcrumb-item  active">Crear nuevo</li>
+				</ol>
+			</div>
+		</div>
+		<div class="container">
+			<div class="card  mt-5 border-secondary">
+				<div class="card-header bg-primary font-weight-bold h4 text-center text-white  shadow">
+					Registro de Personas
+				</div>
+				<div class="card-body">
+					<form th:action="@{/save}" th:object=${persona} method="POST" enctype="multipart/form-data">
+						<div class="row">
+							<div class="form-group" hidden>
+								<label>ID</label>
+								<input th:field="*{personaCodigo}" type="text" class="form-control" />
+							</div>
+							
+							<div class="col-sm-6">
+								<h1 th:text="${habilita}" class="m-0">HABILITADO</h1>
+							</div>
+
+							
+							<p class="d-none" th:text="${new_edit}"> </p>
+							<div class="form-group col mt-2 "   >
+							 	
+								<label class="text-uppercase" for="personaTipoIdentificacion">Tipo Identificacion</label>
+								                      
+
+
+								                                                                                                    
+								<select th:field="*{personaTipoIdentificacion}" class="form-control" id="personaTipoIdentificacion"  > 
+									<option value="CC">Cedula</option>
+									<option value="NIT">Nit</option>
+									<option value="TI">T Identidad</option>
+									<option value="OT">Otro</option>
+									
+								</select>
+								
+							</div>
+
+
+	
+							<div class="form-group mt-2 col">
+								<label>IDENTIFICACION</label>
+								<input th:field="*{personaIdentificacion}" type="search" name="" class="form-control" required
+									autofocus placeholder="Ingrese su identificacion..." th:text=${habilita} />
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="form-group mt-2 col">
+								<label class="text-uppercase">Primer Nombre</label>
+								<input id="personaNombre1" th:field="*{personaNombre1}" type="text" class="form-control  text-uppercase" required
+									placeholder="Ingrese el primer nombre..." />
+							</div>
+							<div class="form-group mt-2 col" >
+								<label class="text-uppercase">Segundo Nombre</label>
+								<input th:field="*{personaNombre2}"  type="text" class="form-control"
+									placeholder="Ingrese el segundo nombre..." />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col">
+								<label class="text-uppercase">Primer Apellido</label>
+								<input th:field="*{personaApellido1}" type="text" class="form-control" required
+									placeholder="Ingrese el primer apellido..." />
+							</div>
+							<div class="form-group col" >
+								<label class="text-uppercase">Segundo Apellido</label>
+								<input th:field="*{personaApellido2}" type="text" class="form-control"
+									placeholder="Ingrese el segundo  apellido..." />
+							</div>
+						</div>
+						<div class="form-group mt-2 col-6">
+							<label class="text-uppercase">Telefono</label>
+							<input th:field="*{personaTelefono}" type="number" class="form-control"
+								placeholder="Ingrese el telefono..." />
+						</div>
+						<div class="row">
+							<div class="col-md-12 mt-3 ">
+								<div class="card card-default">
+									<div class="card-header">
+										<h3 class="card-title font-weight-bold text-uppercase">Subir Archivos</h3>
+									</div>
+									<div class="card-body  shadow">
+										<div class="row">
+
+											<div class="form-group col">
+												<label for="archivoImagen">Seleccione Archivo Arl</label>
+												<input type="file" class="form-control-file" name="arlArchivoImagen"
+													id="archivoImagen">
+											</div>
+											<div class="form-group col">
+												<label for="epsArchivoImagen">Seleccione Archivo Eps</label>
+												<input type="file" class="form-control-file" name="epsArchivoImagen"
+													id="epsArchivoImagen">
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.card -->
+							</div>
+						</div>
+				</div>
+				<div class="card-footer">
+					<button id="guardar" type="submit" class="btn btn-primary btn-crear"><i class="fas fa-save"></i>
+						Guardar</button>
+					<button id="limpiar" type="reset" class="btn btn-danger  btn-crear"><i class='fas fa-broom'></i>
+						Limpiar</button>
+					<a id="atras" th:href="@{/listarpersona}" class="btn btn-success btn-crear" title="Atras"><i
+							class="fas fa-arrow-circle-left"></i> Atras</a>
+				</div>
+				</form>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<!--OTRO SCRIPTS PARA PAGINAS-->
+	<th:block layout:fragment="page-scripts">
+	
+
+		<script>
+		$(document).ready(function(){
+			
+			
+			if($("#personaIdentificacion").val() != ''){
+		
+				
+				$("#personaIdentificacion").attr('readonly', 'true');
+				
+				
+			}
+			
+		})
+		//$("#personaTipoIdentificacion").load(function(){
+			//if($("#personaIdentificacion").val()===""){
+				
+			//$("#personaIdentificacion").attr("readonly", "true")
+			//}
+		//})
+	
+		</script>
+
+		<script>
+		//$("#personaIdentificacion").autocomplete({
+		  // minLength:2,
+		   //source: "prueba",
+ 	       //select: function(event, ui){
+			//console.log("este es el ui.item: "+ui.item.value);
+		   //$("#personaNombre2").val(ui.item.value);
+		   //$("#personaNombre1").val(ui.item.apellido1);
+		   //return false;
+		   
+		   
+		   
+		   
+		   
+		
+		   //$("#documento").val(ui.item.documento);
+		   //$("#especie").val(ui.item.especie);
+		   //$("#raza").val(ui.item.raza);
+		   //$("#especies").val(ui.item.especies);
+		   //$("#razas").val(ui.item.razas);
+		   //$("#representante").val(ui.item.representante);
+		   //$("#contacto_representante").val(ui.item.contacto);
+		
+   		//}
+		//});
+		
+		$(document).ready(function(){
+			$("#personaIdentificacion").autocomplete({
+				minLength:7,
+				source:function(request, response){
+					$.ajax({
+						url:"buscar-persona-por-identificacion/" + request.term,
+						dataType: "json",
+						data:{
+							term:request.term
+						},
+						success:function(data){
+							response($.map(data,function(item){
+								return {
+									label: item.personaIdentificacion,
+									nombre1: item.personaNombre1,
+									nombre2: item.personaNombre2,
+									apellido1: item.personaApellido1,
+									apellido2: item.personaApellido2,
+									telefono: item.personaTelefono
+								}
+							}))
+						}
+					});
+				},
+				 select: function( event, ui ) {
+			     	//$( "#personaIdentificacion" ).val( ui.item.label );
+			        $( "#personaNombre1" ).val( ui.item.nombre1 );
+			        $( "#personaNombre2" ).val( ui.item.nombre2 );
+		            $( "#personaApellido1" ).val( ui.item.apellido1 );
+	                $( "#personaApellido2" ).val( ui.item.apellido2 );
+                    $( "#personaTelefono" ).val( ui.item.telefono );
+       		      }
+			});
+		});
+		</script>
+	</th:block>
+
+
+</body>
+
+</html>

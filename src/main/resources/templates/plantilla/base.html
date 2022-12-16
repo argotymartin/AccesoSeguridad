@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:fragment="head">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<title>Mct</title>
+	<!-- Favicon-->
+	<!--	<link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />-->
+	<link th:href="@{/css/datatables/fontawesonall.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/estilos.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-secondary sticky-top " th:layout="nabvar">
+		<a class="navbar-brand text-white" href="#">
+			Control de Acceso - MCT
+		</a>
+		<img th:src="@{./logo_mct.jpg}" width="135" height="70">
+	</nav>
+
+	<!-- Page content-->
+	<div class="container-fluid content " layout:fragment="page-content">
+
+
+	</div>
+
+	<!-- Bootstrap core JS-->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!--OTRO SCRIPTS PARA PAGINAS-->
+	<th:block layout:fragment="page-scripts">
+
+	</th:block>
+</body>
+
+</html>

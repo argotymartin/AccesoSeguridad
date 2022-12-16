@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminlte_templates/base}">
+
+<head th:replace="adminlte_templates/base::head">
+	<meta charset="ISO-8859-1">
+	<title>Crear Personal</title>
+</head>
+
+<body>
+	<div layout:fragment="contenido" class="content">
+		<div class="row mb-2" th:fragment="h1">
+			<div class="col-sm-6">
+				<h1 class="m-0">CREAR NUEVO</h1>
+			</div>
+
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/listar}">Ver Registros</a></li>
+					<li class="breadcrumb-item  active">Crear nuevo</li>
+				</ol>
+			</div>
+		</div>
+		<div class="container">
+			<div class="card  mt-5 border-secondary">
+				<div class="card-header bg-primary font-weight-bold h4 text-center text-white  shadow">
+					Registro de Personas
+				</div>
+				<div class="card-body">
+					<form th:action="@{/save}" th:object=${persona} method="POST" enctype="multipart/form-data">
+						<div class="row">
+							<div class="form-group" hidden>
+								<label>ID</label>
+								<input th:field="*{id}" type="text" class="form-control" />
+							</div>
+							<div class="form-group mt-2 col">
+								<label>TIPO IDENTIFICACION</label>
+								<select class="custom-select">
+									<option selected>Tipo de identificacion...</option>
+									<option value="1">C.C</option>
+									<option value="2">NIT</option>
+									<option value="3">C.E</option>
+								</select>
+							</div>
+							<div class="form-group mt-2 col">
+								<label>IDENTIFICACION</label>
+								<input th:field="*{persona_identificacion}" type="number" class="form-control" required
+									autofocus placeholder="Ingrese su identificacion..." />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group mt-2 col">
+								<label class="text-uppercase">Primer Nombre</label>
+								<input th:field="*{persona_nombre1}" type="text" class="form-control" required
+									placeholder="Ingrese el primer nombre..." />
+							</div>
+							<div class="form-group mt-2 col">
+								<label class="text-uppercase">Segundo Nombre</label>
+								<input th:field="*{persona_nombre2}" type="text" class="form-control"
+									placeholder="Ingrese el segundo nombre..." />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col">
+								<label class="text-uppercase">Primer Apellido</label>
+								<input th:field="*{persona_apellido1}" type="text" class="form-control" required
+									placeholder="Ingrese el primer apellido..." />
+							</div>
+							<div class="form-group col">
+								<label class="text-uppercase">Segundo Apellido</label>
+								<input th:field="*{persona_apellido2}" type="text" class="form-control"
+									placeholder="Ingrese el segundo  apellido..." />
+							</div>
+						</div>
+						<div class="form-group mt-2 col-6">
+							<label class="text-uppercase">Telefono</label>
+							<input th:field="*{persona_telefono}" type="number" class="form-control"
+								placeholder="Ingrese el telefono..." />
+						</div>
+						<div class="row">
+							<div class="col-md-12 mt-3 ">
+								<div class="card card-default">
+									<div class="card-header">
+										<h3 class="card-title font-weight-bold text-uppercase">Subir Archivos</h3>
+									</div>
+									<div class="card-body  shadow">
+									<div class="row">
+									
+										<div class="form-group col">
+											<label for="archivoImagen">Seleccione Archivo Arl</label>
+											<input type="file" class="form-control-file" name="arlArchivoImagen" id="archivoImagen">
+										</div>
+										<div class="form-group col">
+											<label for="epsArchivoImagen">Seleccione Archivo Eps</label>
+											<input type="file" class="form-control-file" name="epsArchivoImagen" id="epsArchivoImagen">
+										</div>
+									</div>
+									</div>
+								</div>
+								<!-- /.card -->
+							</div>
+						</div>
+				</div>
+				<div class="card-footer">
+					<button id="guardar" type="submit" class="btn btn-primary btn-crear"><i  class="fas fa-save"></i> Guardar</button>
+					<button id="limpiar" type="reset"  class="btn btn-danger  btn-crear"><i  class='fas fa-broom'></i> Limpiar</button>
+					<a id="atras" th:href="@{/listar}" class="btn btn-success btn-crear" title="Atras"><i class="fas fa-arrow-circle-left"></i> Atras</a>
+				</div>
+				</form>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<!--OTRO SCRIPTS PARA PAGINAS-->
+	<th:block layout:fragment="page-scripts">
+
+	</th:block>
+
+
+</body>
+
+</html>

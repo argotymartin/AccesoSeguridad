@@ -1,0 +1,32 @@
+.btn-crear{
+	margin: 0px 5px;
+	transition: ease-in-out all 300ms;
+  }
+.btn-crear:hover{
+	transform: scale(1.1);
+}
+.crear_persona{
+	  z-index: 1;
+    position: absolute;
+    top: 146px;
+    left: 503px;
+}
+.thead{
+	position: sticky;
+	top: 57px;
+}
+.main-header{
+	position: sticky;
+	top: 0;
+}
+#guardar{
+	box-shadow:inset 2px -2px 6px 3px #034681;
+ }
+
+#limpiar{
+    box-shadow:inset 2px -2px 6px 3px rgb(153 9 9);
+}
+
+#atras{
+	box-shadow:inset 2px -2px 6px 3px #186a16;
+}
