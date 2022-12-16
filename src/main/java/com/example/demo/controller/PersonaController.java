@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.mashape.unirest.http.HttpResponse;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.interfaces.IpersonaService;
 import com.example.demo.modelo.Persona;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Controller
 @RequestMapping
@@ -50,6 +53,31 @@ public class PersonaController {
 		service.save(p);
 		return "adminlte_templates/home";
 	}
+	
+
+	@GetMapping("/login2")
+	public String  getLogin() {
+	System.out.println("llego....");
+	Unirest.setTimeouts(0, 0);
+	try {
+		HttpResponse<String> response = Unirest.post("http://172.16.37.10:8280/services/px_LoginWebappsinencrip")
+		  .header("Authorization", "Bearer 16f1b1fdd5963c242ecb3ad89faa434")
+		  .header("Content-Type", "application/json")
+		  .body("{\n    \"usuario\": \"orlin.carrillo\",\n    \"contrasena\": \"Danisaloynico3..\"\n}")
+		  .asString();
+		System.out.println("llego...."+response.getBody());
+		
+		System.out.println("xxxxxx");
+	} catch (UnirestException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return "adminlte_templates/home";
+		
+	}
+
+	 
+	
 	
 	@GetMapping("/buscar")
 	public String listar(Model model, String term) {
@@ -82,7 +110,7 @@ public class PersonaController {
 	}
 
 
-	@PostMapping("/personas/save")
+	@PostMapping("/save")
 	public String save(@Valid Persona p, Model model,@RequestParam("arlArchivoImagen") MultipartFile imagen_arl,@RequestParam("epsArchivoImagen") MultipartFile imagen_eps,
 			RedirectAttributes mensaje) {
 
@@ -131,19 +159,19 @@ public class PersonaController {
 		service.save(p);
 		Long personaCodigo=p.getPersonaCodigo();
 		mensaje.addFlashAttribute("guardar","guardar");
-		return "redirect:/personas/editar/"+personaCodigo ;
+		return "redirect:/editar/"+personaCodigo ;
 	}
 
 
 	
 
-	@GetMapping("/personas/eliminar/{personaCodigo}")
+	@GetMapping("/eliminar/{personaCodigo}")
 	public String delete(Model model,@PathVariable Long personaCodigo) {
 		service.delete(personaCodigo);
 		return "redirect:/personas/listar";
 	}
 
-	@GetMapping("/personas/imagen/{personaCodigo}")
+	@GetMapping("/imagen/{personaCodigo}")
 	public String imagen(@PathVariable Long personaCodigo ,Model model) {
 		java.util.Optional<Persona>persona=service.listarId(personaCodigo);
 		model.addAttribute("persona",persona);
