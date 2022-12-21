@@ -1,7 +1,7 @@
 package com.example.demo.modelo;
 
 public class ResponseIdentityServer {
-	
+
 	 	private String successful;
 	    private ErrorResponseIdentityServer error;
 	    private String data;

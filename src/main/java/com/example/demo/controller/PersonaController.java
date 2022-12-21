@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-import com.mashape.unirest.http.HttpResponse;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.interfaces.IpersonaService;
 import com.example.demo.modelo.Persona;
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -53,7 +52,7 @@ public class PersonaController {
 		service.save(p);
 		return "adminlte_templates/home";
 	}
-	
+
 
 	@GetMapping("/login2")
 	public String  getLogin() {
@@ -66,19 +65,19 @@ public class PersonaController {
 		  .body("{\n    \"usuario\": \"orlin.carrillo\",\n    \"contrasena\": \"Danisaloynico3..\"\n}")
 		  .asString();
 		System.out.println("llego...."+response.getBody());
-		
+
 		System.out.println("xxxxxx");
 	} catch (UnirestException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		return "adminlte_templates/home";
-		
+
 	}
 
-	 
-	
-	
+
+
+
 	@GetMapping("/buscar")
 	public String listar(Model model, String term) {
 		List<Persona>personas=service.listar(term);
@@ -163,7 +162,7 @@ public class PersonaController {
 	}
 
 
-	
+
 
 	@GetMapping("/eliminar/{personaCodigo}")
 	public String delete(Model model,@PathVariable Long personaCodigo) {
